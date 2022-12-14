@@ -1,0 +1,9 @@
+### IDE Generated Files
+/.idea/
+
+### Build Directories
+build/
+cmake-build-*/
+
+### Temporary Files
+tmp/

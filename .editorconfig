@@ -1,0 +1,37 @@
+##
+# EditorConfig helps maintain consistent coding styles for multiple developers working on the same project across
+# various editors and IDEs.
+#
+# https://editorconfig.org
+# https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+##
+
+# Top-Most EditorConfig File
+root = true
+
+# Default Rules
+[*]
+
+# File Encoding
+charset = utf-8
+
+# EOL
+end_of_line = lf
+insert_final_newline = true
+max_line_length = 120
+
+# EOF
+trim_trailing_whitespace = true
+
+# Indentation/Tabulation
+indent_style = space
+indent_size = 2
+tab_width = 2
+
+# IntelliJ IDEs
+ij_wrap_on_typing = true
+
+# These files are displayed in programs with an 80-character default width.
+[{LICENSE.*, CODE_OF_CONDUCT.*}]
+ij_visual_guides = 80
+max_line_length = 80

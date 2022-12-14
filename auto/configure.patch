@@ -1,0 +1,10 @@
+--- configure	2022-12-13 10:02:49.352960798 -0800
++++ configure.cmake	2022-12-13 12:05:51.097493074 -0800
+@@ -103,6 +103,7 @@
+ have=NGX_HTTP_SCGI_TEMP_PATH value="\"$NGX_HTTP_SCGI_TEMP_PATH\""
+ . auto/define
+
++. auto/cmake/CMakeLists.sh
+ . auto/make
+ . auto/lib/make
+ . auto/install

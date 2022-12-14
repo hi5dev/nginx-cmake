@@ -1,0 +1,56 @@
+# Minimum version of CMake required by this file.
+cmake_minimum_required(VERSION 3.24)
+
+# Project meta data.
+project(nginx
+  VERSION @NGINX_VERSION@
+  DESCRIPTION "Add nginx to a CMake project."
+  HOMEPAGE_URL "https://github.com/hi5dev/nginx-cmake"
+  LANGUAGES C)
+
+# Macro to provide an option dependent on other options.
+include(CMakeDependentOption)
+
+# Project options.
+option(nginx_INSTALL "Include installation rules" ON)
+cmake_dependent_option(nginx_INSTALL_CONFIG_FILES "Install the config files to etc" ON "nginx_INSTALL" OFF)
+cmake_dependent_option(nginx_INSTALL_EXE "Install the nginx executable" ON "nginx_INSTALL" OFF)
+cmake_dependent_option(nginx_INSTALL_MANPAGE "Install the man pages" ON "nginx_INSTALL" OFF)
+
+# Target for the nginx runtime executable.
+add_executable(nginx)
+
+# Read-only target for referencing the executable from other projects.
+add_executable(nginx::nginx ALIAS nginx)
+
+# Link the executable to its required libraries.
+target_link_libraries(nginx PUBLIC @NGINX_LIBS@)
+
+# Directories with the nginx public headers.
+target_include_directories(nginx PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+  @NGINX_INCLUDE_DIRS@)
+
+# Add sources as private since they won't be referenced by other projects.
+target_sources(nginx PRIVATE
+  @NGINX_SOURCES@)
+
+# Optionally include the install rules.
+if(nginx_INSTALL)
+  # Define GNU standard installation directories.
+  include(GNUInstallDirs)
+
+  # Install the executable in the system admin executables directory.
+  if(nginx_INSTALL_EXE)
+    install(TARGETS nginx RUNTIME DESTINATION ${CMAKE_INSTALL_SBINDIR})
+  endif()
+
+  # Install the configuration files.
+  if(nginx_INSTALL_CONFIG_FILES)
+    install(DIRECTORY conf/ DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/nginx)
+  endif()
+
+  # Install the man page.
+  if(nginx_INSTALL_MANPAGE)
+    install(FILES docs/man/nginx.8 DESTINATION ${CMAKE_INSTALL_MANDIR}/man8/)
+  endif()
+endif()

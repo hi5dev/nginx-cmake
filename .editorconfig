@@ -35,3 +35,8 @@ ij_wrap_on_typing = true
 [{LICENSE.*, CODE_OF_CONDUCT.*}]
 ij_visual_guides = 80
 max_line_length = 80
+
+# Sites like GitHub use 100 characters max for README files.
+[README.md]
+ij_visual_guides = 100
+max_line_length = 100

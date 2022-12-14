@@ -8,7 +8,8 @@ Easily add [nginx](https://nginx.org/) to a CMake project.
 include(FetchContent)
 
 # Declare this repository as a dependency.
-FetchContent_Declare(nginx
+# Make sure not to name this "nginx" or it will conflict with the actual nginx dependency.
+FetchContent_Declare(nginx-cmake
   GIT_REPOSITORY https://github.com/hi5dev/nginx-cmake
   GIT_TAG main)
 
@@ -33,7 +34,7 @@ set(nginx_INSTALL_MANPAGE ON)
 
 # Clones this repository, then nginx, patches it for CMake, configures it, and makes it available
 # for immediate use by CMake.
-FetchContent_MakeAvailable(nginx)
+FetchContent_MakeAvailable(nginx-cmake)
 ```
 
 ## How it Works
